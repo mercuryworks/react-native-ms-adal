@@ -271,6 +271,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
 
   private AuthenticationContext getOrCreateContext (String authority, boolean validateAuthority) throws NoSuchPaddingException, NoSuchAlgorithmException {
 
+    AuthenticationSettings.INSTANCE.setUseBroker(true);
     AuthenticationContext result;
     if (!contexts.containsKey(authority)) {
       result = new AuthenticationContext(getCurrentActivity(), authority, validateAuthority);
