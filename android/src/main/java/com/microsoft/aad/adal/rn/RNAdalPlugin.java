@@ -166,6 +166,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
       authContext = getOrCreateContext(authority, validateAuthority);
 
       //  We should retrieve userId from broker cache since local is always empty
+      /*
       boolean useBroker = AuthenticationSettings.INSTANCE.getUseBroker();
       if (useBroker) {
         if (TextUtils.isEmpty(userId)) {
@@ -180,7 +181,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
           }
         }
       }
-
+      */
     } catch (Exception e) {
       promise.reject(e);
       //callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.getMessage()));
