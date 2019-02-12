@@ -24,5 +24,5 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.facebook.react:react-native:+'
-    compile 'com.microsoft.aad:adal:1.12.0'
+    compile 'com.microsoft.aad:adal:1.16.1'
 }
