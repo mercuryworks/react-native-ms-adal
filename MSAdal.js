@@ -1,7 +1,7 @@
 import AuthenticationContext from './msadal/AuthenticationContext';
 var AuthenticationResult = require("./msadal/AuthenticationResult");
 
-function MSAdalLogin(authority, clientId, redirectUri, resourceUri) {
+function MSAdalLogin(authority, clientId, redirectUri, resourceUri, userId) {
   // Shows the user authentication dialog box if required
 
   return new Promise(function(resolve, reject) {
@@ -15,7 +15,7 @@ function MSAdalLogin(authority, clientId, redirectUri, resourceUri) {
       }
 
       // Attempt to authorize the user silently
-      context.acquireTokenSilentAsync(resourceUri, clientId).then(
+      context.acquireTokenSilentAsync(resourceUri, clientId, userId).then(
         function(authDetails) {
           resolve(authDetails);
         },
