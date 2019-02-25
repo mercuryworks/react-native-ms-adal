@@ -79,7 +79,7 @@ RCT_REMAP_METHOD(acquireTokenAsync,
                                                               validateAuthority:validateAuthority];
     // `x-msauth-` redirect url prefix means we should use brokered authentication
     // https://github.com/AzureAD/azure-activedirectory-library-for-objc#brokered-authentication
-    authContext.credentialsType = (urlRedirectUri.scheme && [urlRedirectUri.scheme hasPrefix: @"x-msauth-"]) ? AD_CREDENTIALS_AUTO : AD_CREDENTIALS_EMBEDDED;
+    authContext.credentialsType = (urlRedirectUri.scheme && [urlRedirectUri.scheme hasPrefix: @"x-msauth-"]) ? AD_CREDENTIALS_EMBEDDED : AD_CREDENTIALS_EMBEDDED;
 
     // TODO iOS sdk requires user name instead of guid so we should map provided id to a known user name
     userId = [RNAdalUtils mapUserIdToUserName:authContext
