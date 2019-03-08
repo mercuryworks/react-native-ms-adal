@@ -75,8 +75,22 @@ RCT_REMAP_METHOD(acquireTokenAsync,
 
     NSURL *urlRedirectUri = [NSURL URLWithString:redirectUri];
 
-    ADAuthenticationContext *authContext = [RNAdalPlugin getOrCreateAuthContext:authority
-                                                              validateAuthority:validateAuthority];
+    if (!existingContexts)
+    {
+        existingContexts = [NSMutableDictionary dictionaryWithCapacity:1];
+    }
+
+    ADAuthenticationError *error;
+
+    ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority validateAuthority:validateAuthority error:&error];
+
+    if (error != nil)
+    {
+        @throw(error);
+    }
+
+    [existingContexts setObject:authContext forKey:authority];
+    
     // `x-msauth-` redirect url prefix means we should use brokered authentication
     // https://github.com/AzureAD/azure-activedirectory-library-for-objc#brokered-authentication
     authContext.credentialsType = (urlRedirectUri.scheme && [urlRedirectUri.scheme hasPrefix: @"x-msauth-"]) ? AD_CREDENTIALS_AUTO : AD_CREDENTIALS_EMBEDDED;
