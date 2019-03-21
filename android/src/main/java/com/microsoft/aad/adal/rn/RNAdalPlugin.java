@@ -50,7 +50,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class RNAdalPlugin extends ReactContextBaseJavaModule {
 
 
-  private static final PromptBehavior SHOW_PROMPT_AUTO = PromptBehavior.Auto;
+  private static final PromptBehavior SHOW_PROMPT_AUTO = PromptBehavior.Always;
 
   private static final int GET_ACCOUNTS_PERMISSION_REQ_CODE = 0;
   private static final String PERMISSION_DENIED_ERROR =  "Permissions denied";
