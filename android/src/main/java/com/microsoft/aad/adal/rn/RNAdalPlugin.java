@@ -279,7 +279,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
     AuthenticationSettings.INSTANCE.setUseBroker(true);
     AuthenticationContext result;
     if (!contexts.containsKey(authority)) {
-      result = new AuthenticationContext(getCurrentActivity(), authority, validateAuthority);
+      result = new AuthenticationContext(applicationContext, authority, validateAuthority);
       this.contexts.put(authority, result);
     } else {
       result = contexts.get(authority);
