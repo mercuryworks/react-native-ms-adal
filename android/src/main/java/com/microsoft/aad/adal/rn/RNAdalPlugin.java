@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.app.Application;
 
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -59,6 +60,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
   //private Activity mActivity = null;
   private final Hashtable<String, AuthenticationContext> contexts = new Hashtable<String, AuthenticationContext>();
   private AuthenticationContext currentContext;
+  private Application applicationContext;
   //private CallbackContext callbackContext;
 
   private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
@@ -78,7 +80,9 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
     super(reactContext);
 
     //mActivity = reactContext.getCurrentActivity();
+    applicationContext = (Application) reactContext.getApplicationContext();
     reactContext.addActivityEventListener(mActivityEventListener);
+    
 
     // Android API < 18 does not support AndroidKeyStore so ADAL requires
     // some extra work to crete and pass secret key to ADAL.
@@ -275,7 +279,7 @@ public class RNAdalPlugin extends ReactContextBaseJavaModule {
     AuthenticationSettings.INSTANCE.setUseBroker(true);
     AuthenticationContext result;
     if (!contexts.containsKey(authority)) {
-      result = new AuthenticationContext(getCurrentActivity(), authority, validateAuthority);
+      result = new AuthenticationContext(applicationContext, authority, validateAuthority);
       this.contexts.put(authority, result);
     } else {
       result = contexts.get(authority);
