@@ -1,7 +1,7 @@
 import AuthenticationContext from './msadal/AuthenticationContext';
 var AuthenticationResult = require("./msadal/AuthenticationResult");
 
-function MSAdalLogin(authority, clientId, redirectUri, resourceUri, userId) {
+function MSAdalLogin(authority, clientId, redirectUri, resourceUri, userId, extraQueryParameters) {
   // Shows the user authentication dialog box if required
 
   return new Promise(function(resolve, reject) {
@@ -21,7 +21,7 @@ function MSAdalLogin(authority, clientId, redirectUri, resourceUri, userId) {
         },
         function() {
           // We require user credentials, so this triggers the authentication dialog box
-          context.acquireTokenAsync(resourceUri, clientId, redirectUri).then(
+          context.acquireTokenAsync(resourceUri, clientId, redirectUri, null, extraQueryParameters).then(
             function(authDetails) {
               resolve(authDetails);
             },
